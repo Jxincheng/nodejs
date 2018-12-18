@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用layui</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <style type="text/css">
+      table{text-align: center;}
+    </style>
+  </head>
+  <body layadmin-themealias="default">
+    <div class="layui-card layadmin-header" style="display: block;">
+      <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+        <a lay-href="">首页</a>
+        <span lay-separator="">/</span><a>商品管理</a>
+        <span lay-separator="">/</span><a><cite>商品列表</cite></a>
+      </div>
+    </div>
+    <div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <!-- <div class="layui-card-header">订单统计</div> -->
+            <div class="layui-card-body">
+              <!-- <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-22" lay-id="test-table-page" style=" "> -->
+               <div class="layui-table-box">
+   <!-- <div class="layui-card-body"> -->
+              <button class="layui-btn layui-btn-sm" onclick="addGoods()"><i class="layui-icon"></i>添加</button>
+              <button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i>删除</button>
+              <div class="layui-inline">
+                <input class="layui-input" name="id" id="test-table-demoReload" autocomplete="off">
+              </div>
+              <button class="layui-btn">搜索</button>
+              <table class="layui-table">
+                <colgroup>
+                  <col width="40">
+                  <col width="40">
+                  <col width="160">
+                  <col width="80">
+                  <col width="80">
+                  <col>
+                  <col width="120">
+                  <col width="120">
+                  <col width="80">
+                  <col width="100">
+                  <col width="120">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th><input name="" type="checkbox" value="" id="all"></th>
+                    <th>#</th>
+                    <th>商品名称</th>
+                    <th>品牌</th>
+                    <th>产地</th>
+                    <th>介绍</th>
+                    <th><span>价格(原价)</span><span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc" title="升序"></i><i class="layui-edge layui-table-sort-desc" title="降序"></i></span></th>
+                    <th><span>价格(现价)</span><span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc" title="升序"></i><i class="layui-edge layui-table-sort-desc" title="降序"></i></span></th>
+                    <th><span>库存</span><span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc" title="升序"></i><i class="layui-edge layui-table-sort-desc" title="降序"></i></span></th>
+                    <th>发布状态</th>
+                    <th>操作</th>
+                  </tr> 
+                </thead>
+                <tbody>
+                  <tr>
+                    <th><input name="" type="checkbox" value=""></th>
+                    <td>1</td>
+                    <td>爱他美1罐900克</td>
+                    <td>爱他美</td>
+                    <td>荷兰</td>
+                    <td>好喝就选它</td>
+                    <td>500</td>
+                    <td>525</td>
+                    <td>30</td>
+                    <td>已上线
+                    </td>
+                    <td>
+                      <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="updateGoods()">编辑</a>
+                      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><input name="" type="checkbox" value=""></th>
+                    <td>2</td>
+                    <td>爱他美1罐900克</td>
+                    <td>爱他美</td>
+                    <td>荷兰</td>
+                    <td>好喝就选它</td>
+                    <td>500</td>
+                    <td>525</td>
+                    <td>30</td>
+                    <td>已上线</td>
+                    <td>
+                      <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="updateGoods()">编辑</a>
+                      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><input name="" type="checkbox" value=""></th>
+                    <td>3</td>
+                    <td>爱他美1罐900克</td>
+                    <td>爱他美</td>
+                    <td>荷兰</td>
+                    <td>好喝就选它</td>
+                    <td>500</td>
+                    <td>525</td>
+                    <td>30</td>
+                    <td>已上线</td>
+                    <td>
+                      <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="updateGoods()">编辑</a>
+                      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div> -->
+               
+ 
+
+              </div>
+            <!-- </div> -->
+          </div>
+        </div> 
+      </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script src="../layui/layui.all.js"></script>
+    <script>
+      let tbody = document.querySelector('tbody');
+      let rootpath = 'http://localhost:5002';
+      let pagesize = 10;
+      let total = 0;
+      let nowpage = 1;
+      getListData(1);
+      function getListData(page){
+        let url = rootpath+'/goods/getGoods';
+        // let data = {
+        //   pagesize:pagesize,
+        //   page:page
+        // }
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4){
+            let res = JSON.parse(xhr.responseText);
+            console.log(res);
+            if(res.err==0){
+              load(res.data);
+              total=res.data.total;
+              console.log(res.data);
+            }
+          }
+        }
+        xhr.open("post",url,true);
+        xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+        xhr.send();
+        // xhr.send("pagesize="+pagesize+"&page="+page);
+        // $.post(url,data,function(res){
+        //   if(res.err==0){
+        //     load(res.data);
+        //     total=res.data.total;
+        //   }
+        // })
+      }
+      // 列表渲染
+      function load(data){
+        // if(data.goodslist.length>0){
+        if(data.length>0){
+          let td='';
+          for(var i=0;i<data.length;i++){
+            let string=`<tr>
+                    <th><input name="" type="checkbox" value=""></th>
+                    <td data-id="${data[i]['_id']}">${i+1}</td>
+                    <td>${data[i]['name']}</td>
+                    <td>${data[i]['brand']}</td>
+                    <td>${data[i]['country']}</td>
+                    <td>${data[i]['title']}</td>
+                    <td>${data[i]['oldprice']}</td>
+                    <td>${data[i]['newprice']}</td>
+                    <td>${data[i]['stock']}</td>
+                    <td>${data[i]['grounding']}</td>
+                    <td>
+                      <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="updateGoods()">编辑</a>
+                      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </td>
+                  </tr>`
+              td+=string;
+          }
+          tbody.innerHTML=td;
+        }else{
+          tbody.innerHTML='没有商品';
+        }
+      }
+      // 添加商品
+      function addGoods(){
+        location.href = 'product-add.html';
+      }
+      // 商品编辑
+      function updateGoods(){
+        location.href = 'product-update.html';
+      }
+    </script>
+  <script>
+
+  </script> 
+  </body>
+</html>

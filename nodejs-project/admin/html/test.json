@@ -1,0 +1,11 @@
+[{
+	"id":1,
+	"goodsname": "1罐900克",
+	"brand": "爱他美",
+	"title": "好喝就选它",
+	"oldprice":500,
+	"newprice":525,
+	"stock":30,
+	"country":"荷兰",
+	"joinTime":"2018-12-12"
+}]
